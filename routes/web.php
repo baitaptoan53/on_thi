@@ -20,6 +20,6 @@ Route::get('/', function () {
 })->name('home');
 Route::get('/login',[Authorization::class,'login_show']);
 Route::get('/register',[Authorization::class,'register_show']);
-Route::post('/login',[Authorization::class,'login'])->name('login');
+Route::post('/login',[Authorization::class,'login'])->name('login')->middleware('auth_check');
 Route::post('/register',[Authorization::class,'register'])->name('register');
-Route::resource('users', UsersController::class);   
+Route::resource('users', UsersController::class)->middleware('admin');   

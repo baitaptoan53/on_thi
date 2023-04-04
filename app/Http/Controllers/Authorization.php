@@ -17,8 +17,12 @@ class Authorization extends Controller
     public function login(Request $request){
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('/');
+            // neu role la admin thi chuyen den trang admin
+            if (auth()->user()->role == 'admin') {
+                return redirect()->route('users.index');
+            }
+            // neu role la user thi chuyen den trang user
+            return redirect()->route('home');
         }
         return back()->with('error','Tài khoản hoặc mật khẩu không đúng');
     }
