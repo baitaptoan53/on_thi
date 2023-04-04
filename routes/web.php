@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authorization;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/login',[Authorization::class,'login_show']);
 Route::get('/register',[Authorization::class,'register_show']);
 Route::post('/login',[Authorization::class,'login'])->name('login');
 Route::post('/register',[Authorization::class,'register'])->name('register');
+Route::resource('users', UsersController::class);   
