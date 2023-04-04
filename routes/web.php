@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Authorization;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/login',[Authorization::class,'login_show']);
+Route::get('/register',[Authorization::class,'register_show']);
+Route::post('/login',[Authorization::class,'login'])->name('login');
+Route::post('/register',[Authorization::class,'register'])->name('register');
