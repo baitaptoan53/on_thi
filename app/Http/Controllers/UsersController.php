@@ -84,13 +84,10 @@ class UsersController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required'
         ]);
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
-        // ma hoa password
-        $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->route('users.index');
     }

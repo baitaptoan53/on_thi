@@ -22,7 +22,9 @@ class Authorization extends Controller
                 return redirect()->route('users.index');
             }
             // neu role la user thi chuyen den trang user
-            return redirect()->route('home');
+            if (auth()->user()->role == 'user') {
+                return redirect()->route('home');
+            }
         }
         return back()->with('error','Tài khoản hoặc mật khẩu không đúng');
     }
