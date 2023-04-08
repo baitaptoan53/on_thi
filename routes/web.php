@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Authorization;
+use App\Http\Controllers\EvnController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,4 @@ Route::get('/register',[Authorization::class,'register_show']);
 Route::post('/login',[Authorization::class,'login'])->name('login')->middleware('auth_check');
 Route::post('/register',[Authorization::class,'register'])->name('register');
 Route::resource('users', UsersController::class)->middleware('admin');   
+Route::resource('/env',EvnController::class)->only(['index','store']);

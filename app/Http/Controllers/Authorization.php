@@ -8,13 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class Authorization extends Controller
 {
-    public function login_show(){
+    public function login_show()
+    {
         return view('login');
     }
-    public function register_show(){
+    public function register_show()
+    {
         return view('register');
     }
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             // neu role la admin thi chuyen den trang admin
@@ -26,9 +29,10 @@ class Authorization extends Controller
                 return redirect()->route('home');
             }
         }
-        return back()->with('error','Tài khoản hoặc mật khẩu không đúng');
+        return back()->with('error', 'Tài khoản hoặc mật khẩu không đúng');
     }
-    public function register(Request $request){
+    public function register(Request $request)
+    {
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -39,6 +43,6 @@ class Authorization extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        return redirect()->route('login')->with('success','Đăng ký thành công');
+        return redirect()->route('login')->with('success', 'Đăng ký thành công');
     }
 }
